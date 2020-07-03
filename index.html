@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+  <script src="https://kit.fontawesome.com/289a073027.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="style.css">
+<link rel="shortcut icon" type="image/x-icon" href="MA.PNG">
+
+
+  <title>Maiash</title>
+</head>
+<body>
+
+  <nav class="menu">
+   <header>Menu <span>&times;</span></header>
+   <ol>
+       <li class="menu-item"><a href="#0">Home</a></li>
+       <li class="menu-item"><a href="#0">Skill</a></li>
+       <li class="menu-item">
+           <a href="#0">Portfolio</a>
+           <ol class="sub-menu">
+               <li class="menu-item"><a href="#0">PSD TO HTML</a></li>
+               <li class="menu-item"><a href="#0">BOOTSTRAP</a></li>
+               <li class="menu-item"><a href="#0">WEB PAGE</a></li>
+           </ol>
+       </li>
+       <li class="menu-item">
+           <a href="#0">Gallery</a>
+           <ol class="sub-menu">
+               <li class="menu-item"><a href="#0">WEB DESIGN</a></li>
+               <li class="menu-item"><a href="#0">SINGLE PAGE </a></li>
+               <li class="menu-item"><a href="#0">MULTIPLE PAGE</a></li>
+           </ol>
+       </li>
+       <li class="menu-item"><a href="#0">Contact</a></li>
+   </ol>
+   <footer><button aria-label="Toggle Menu">About Me</button></footer>
+</nav>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+
+  var $els = $('.menu a, .menu header');
+var count = $els.length;
+var grouplength = Math.ceil(count/3);
+var groupNumber = 0;
+var i = 1;
+$('.menu').css('--count',count+'');
+$els.each(function(j){
+   if ( i > grouplength ) {
+       groupNumber++;
+       i=1;
+   }
+   $(this).attr('data-group',groupNumber);
+   i++;
+});
+
+$('.menu footer button').on('click',function(e){
+   e.preventDefault();
+   $els.each(function(j){
+       $(this).css('--top',$(this)[0].getBoundingClientRect().top + ($(this).attr('data-group') * -15) - 20);
+       $(this).css('--delay-in',j*.1+'s');
+       $(this).css('--delay-out',(count-j)*.1+'s');
+   });
+   $('.menu').toggleClass('closed');
+   e.stopPropagation();
+});
+
+// run animation once at beginning for demo
+setTimeout(function(){
+   $('.menu footer button').click();
+   setTimeout(function(){
+       $('.menu footer button').click();
+   }, (count * 100) + 500 );
+}, 1000);
+
+
+</script>
+</body>
+</html>
